@@ -22,6 +22,57 @@ haveExpanded = false;
 zFrontIndex = 200;
 //caixa1.style.transition = "width .5, height .5s linear";
 
+let start // set on the first step to the timestamp provided
+const el = document.getElementById('loader') // get the element
+const loaderWrapper = document.getElementById('loader-wrapper')
+const final = parseInt(el.textContent, 10) // parse out the final number
+const duration = 7000 // duration in ms
+const step = ts => {
+  if (!start) {
+    start = ts
+  }
+  // get the time passed as a fraction of total duration
+  let progress = (ts - start) / duration
+
+  el.textContent = Math.floor(progress * final) // set the text
+  if (progress < 1) {
+    // if we're not 100% complete, request another animation frame
+    requestAnimationFrame(step)
+  }
+}
+
+function hideLoading() {
+  setTimeout(function(){
+    loader.style.opacity = "0";
+    loaderWrapper.style.opacity = "0";
+ }, 7000);
+  setTimeout(function(){
+    loaderWrapper.style.display = "none";
+    loader.style.display = "none";
+ }, 8000);
+}
+
+hideLoading();
+
+// start the animation
+requestAnimationFrame(step)
+
+function startCursor(){
+  // cursor.img1 = cursor.getElementById("main");
+  // cursor.img2 = document.getElementById("ast");
+  cursor.style.left = 0 + "px";
+  cursor.style.top = 0 + "px";
+}
+
+startCursor();
+
+document.addEventListener('mousemove', e => {
+  cursorX = e.clientX;
+  cursorY = e.clientY;
+  cursor.style.left = cursorX +"px";
+  cursor.style.top = cursorY + "px";
+});
+
 // Make the DIV element draggable:
 function dragElement(element) {
   var elementStartTop = 0, elementStartLeft = 0, mouseStartX, mouseStartY, oldTransition;
@@ -391,22 +442,6 @@ window.setInterval(function(){
   console.log("ok");
 }, 33);
 
-function startCursor(){
-  // cursor.img1 = cursor.getElementById("main");
-  // cursor.img2 = document.getElementById("ast");
-  cursor.style.left = 0 + "px";
-  cursor.style.top = 0 + "px";
-}
-
-startCursor();
-
-document.addEventListener('mousemove', e => {
-  cursorX = e.clientX;
-  cursorY = e.clientY;
-  cursor.style.left = cursorX +"px";
-  cursor.style.top = cursorY + "px";
-});
-
 //funcao chamada uma vez somente
 function organizeDarkMode(){
   startW = 20;
@@ -445,6 +480,13 @@ function copy(that){
   setTimeout(function(){ cursor.style.transform = "translate(-50%, -50%) rotate(0deg) scale(1)"; }, 2000);
   setTimeout(function(){ changeCursor("cursor-cross.svg"); }, 2000);
 }
+setTimeout(function(){
+  StartBoxElement(caixa1);
+  StartBoxElement(caixa2);
+  StartBoxElement(caixa3);
+  StartBoxElement(caixa4);
+  StartBoxElement(caixa5);
+}, 7000);
 
 StartBoxElement(caixa1);
 StartBoxElement(caixa2);
