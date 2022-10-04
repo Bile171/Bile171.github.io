@@ -3,7 +3,6 @@
   margin: 0;
   cursor: none;
   font-size: 16px;
-  touch-action: manipulation;
 }
 
 @font-face {
@@ -335,8 +334,8 @@ h1 {
 }
 
 #box5 .image {
-  background: url("https://media.giphy.com/media/dWa2rUaiahx1FB3jor/giphy.gif");
-  background-size: 250px;
+  background: url("BTK.gif");
+  background-size: 1500px;
 }
 
 /* Media Queries */
